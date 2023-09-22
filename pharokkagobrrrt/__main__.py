@@ -117,7 +117,7 @@ For information on Snakemake profiles see:
 https://snakemake.readthedocs.io/en/stable/executing/cli.html#profiles
 \b
 RUN EXAMPLES:
-Required:           pharokkagobrrrt run --input [file]
+Required:           pharokkagobrrrt run --input [dir]  --db [dir]
 Specify threads:    pharokkagobrrrt run ... --threads [threads]
 Disable conda:      pharokkagobrrrt run ... --no-use-conda 
 Change defaults:    pharokkagobrrrt run ... --snake-default="-k --nolock"
@@ -135,24 +135,20 @@ Available targets:
         help_option_names=["-h", "--help"], ignore_unknown_options=True
     ),
 )
-@click.option("--input", "_input", help="Input file/directory", type=str, required=True)
+@click.option("--input", "_input", help="Input contigs directory", type=click.Path(), required=True)
+@click.option("--db", help="Pharokka DB dir", type=click.Path(), required=True)
 @common_options
-def run(_input, output, log, **kwargs):
+def run(**kwargs):
     """Run PharokkaGoBRRRT"""
-    # Config to add or update in configfile
+
     merge_config = {
-        "input": _input,
-        "output": output,
-        "log": log
+        "args": kwargs
     }
 
-    # run!
     run_snakemake(
-        # Full path to Snakefile
         snakefile_path=snake_base(os.path.join("workflow", "Snakefile")),
         system_config=snake_base(os.path.join("config", "config.yaml")),
         merge_config=merge_config,
-        log=log,
         **kwargs
     )
 

@@ -1,26 +1,10 @@
-import glob
 
 
 configfile: os.path.join(workflow.basedir, '../', 'config', 'config.yaml')
 
 
-# Concatenate Snakemake's own log file with the master log file
-def copy_log_file():
-    files = glob.glob(os.path.join(".snakemake", "log", "*.snakemake.log"))
-    if not files:
-        return None
-    current_log = max(files, key=os.path.getmtime)
-    shell("cat " + current_log + " >> " + config['log'])
-
-onsuccess:
-    copy_log_file()
-
-onerror:
-    copy_log_file()
-
-
-# Target file
-outTouch = os.path.join(config['output'], config['input'])
+include: os.path.join("rules", "preflight.smk")
+include: os.path.join("rules", "megapharokka.smk")
 
 
 # Mark target rules
@@ -34,7 +18,7 @@ def targetRule(fn):
 @targetRule
 rule all:
     input:
-        outTouch
+        targets
 
 
 @targetRule
@@ -42,8 +26,3 @@ rule print_targets:
     run:
         print("\nTop level rules are: \n", file=sys.stderr)
         print("* " + "\n* ".join(target_rules) + "\n\n", file=sys.stderr)
-
-
-rule yeet:
-    output:
-        touch(outTouch)

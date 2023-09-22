@@ -1,4 +1,15 @@
-# Snakemake config
-input:
-output: 'pharokkagobrrrt.out/'
-log: 'pharokkagobrrrt/pharokkagobrrrt.log'
+args:
+    input:
+    output: 'pharokkagobrrrt.out/'
+    log: 'pharokkagobrrrt/pharokkagobrrrt.log'
+megapharokka:
+    -g prodigal-gv
+    --sensitivity 2
+    --skip_extra_annotations
+    --skip_mash
+    --mmseqs2
+resources:
+    big:
+        cpu: 64
+        mem: 64000
+        time: "01:00:00"
