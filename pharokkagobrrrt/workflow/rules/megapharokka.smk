@@ -19,7 +19,7 @@ rule run_megapharokka:
     benchmark:
         os.path.join(config["args"]["bench"], "run_megapharokka.{sample}.log")
     log:
-        os.path.join(config["args"]["log"], "run_megapharokka.{sample}.log")
+        os.path.join(config["args"]["logdir"], "run_megapharokka.{sample}.log")
     shell:
         """
         megapharokka.py \
@@ -44,7 +44,7 @@ rule pack_megapharokka:
     benchmark:
         os.path.join(config["args"]["bench"], "pack_megapharokka.{sample}.log")
     log:
-        os.path.join(config["args"]["log"], "pack_megapharokka.{sample}.log")
+        os.path.join(config["args"]["logdir"], "pack_megapharokka.{sample}.log")
     shell:
         """
         mv {input.gbk} {output.gbk}

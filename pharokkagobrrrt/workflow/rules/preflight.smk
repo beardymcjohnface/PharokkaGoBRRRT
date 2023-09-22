@@ -21,6 +21,8 @@ config["args"]["envs"] = os.path.join("..", "envs")
 config["args"]["temp"] = os.path.join(config["args"]["output"], "temp")
 config["args"]["results"] = os.path.join(config["args"]["output"], "results")
 config["args"]["archive"] = os.path.join(config["args"]["output"], "archive")
+config["args"]["bench"] = os.path.join(config["args"]["output"], "bench")
+config["args"]["logdir"] = os.path.join(config["args"]["output"], "log")
 
 
 # parse input contigs
