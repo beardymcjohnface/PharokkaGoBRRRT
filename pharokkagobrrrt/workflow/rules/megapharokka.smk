@@ -10,7 +10,7 @@ rule run_megapharokka:
     threads:
         config["resources"]["big"]["cpu"]
     resources:
-        mem = config["resources"]["big"]["mem"] + "MB",
+        mem = str(config["resources"]["big"]["mem"]) + "MB",
         time = config["resources"]["big"]["time"]
     conda:
         os.path.join(config["args"]["envs"], "pharokka.yaml")
