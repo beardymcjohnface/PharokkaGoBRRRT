@@ -1,0 +1,4 @@
+include pharokkagobrrrt/pharokkagobrrrt.LICENSE
+include pharokkagobrrrt/pharokkagobrrrt.CITATION
+include pharokkagobrrrt/pharokkagobrrrt.VERSION
+recursive-include pharokkagobrrrt *
