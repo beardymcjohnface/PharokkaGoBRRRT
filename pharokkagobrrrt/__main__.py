@@ -135,7 +135,7 @@ Available targets:
         help_option_names=["-h", "--help"], ignore_unknown_options=True
     ),
 )
-@click.option("--input", "_input", help="Input contigs directory", type=click.Path(), required=True)
+@click.option("--input", help="Input contigs directory", type=click.Path(), required=True)
 @click.option("--db", help="Pharokka DB dir", type=click.Path(), required=True)
 @common_options
 def run(**kwargs):
