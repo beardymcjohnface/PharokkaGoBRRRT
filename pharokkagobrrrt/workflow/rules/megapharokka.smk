@@ -1,6 +1,14 @@
-rule run_megapharokka:
+rule unzip_reference:
     input:
         lambda wildcards: fasta_files[wildcards.sample]
+    output:
+        os.path.join(config["args"]["temp"], "{sample}.pharokka", "{sample}.fasta")
+    shell:
+        "zcat {input} > {output}"
+
+
+rule run_megapharokka:
+
     output:
         os.path.join(config["args"]["temp"], "{sample}.pharokka", "pharokka.gbk")
     params:

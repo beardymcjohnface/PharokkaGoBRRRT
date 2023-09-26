@@ -11,7 +11,7 @@ dependencies:
   - trnascan-se >=2.0.9
   - minced >=0.4.2
   - aragorn >=1.2.41
-  - mash >=2.2
+  - mash ==2.2
   - dnaapler >=0.3.0
   - pycirclize >=0.3.1
   - alive-progress >=3.0.1
