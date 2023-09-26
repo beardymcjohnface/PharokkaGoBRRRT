@@ -8,6 +8,7 @@ megapharokka:
     --skip_extra_annotations
     --skip_mash
     --mmseqs2
+    --force
 resources:
     big:
         cpu: 64
