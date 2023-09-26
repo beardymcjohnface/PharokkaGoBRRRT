@@ -8,7 +8,8 @@ rule unzip_reference:
 
 
 rule run_megapharokka:
-
+    input:
+        os.path.join(config["args"]["temp"],"{sample}.pharokka","{sample}.fasta")
     output:
         os.path.join(config["args"]["temp"], "{sample}.pharokka", "pharokka.gbk")
     params:
