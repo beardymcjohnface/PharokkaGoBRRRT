@@ -39,6 +39,11 @@ rule pack_megapharokka:
         tar = os.path.join(config["args"]["archive"], "{sample}.tar.zst")
     params:
         dir = os.path.join(config["args"]["temp"],"{sample}.pharokka")
+    threads:
+        config["resources"]["sml"]["cpu"]
+    resources:
+        mem = str(config["resources"]["sml"]["mem"]) + "MB",
+        time = config["resources"]["sml"]["time"]
     group:
         "megapharokka"
     benchmark:

@@ -13,3 +13,7 @@ resources:
         cpu: 64
         mem: 64000
         time: "01:00:00"
+    sml:
+        cpu: 1
+        mem: 2000
+        time: "00:10:00"
