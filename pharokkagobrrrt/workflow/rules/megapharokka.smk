@@ -40,10 +40,10 @@ rule pack_megapharokka:
     params:
         dir = os.path.join(config["args"]["temp"],"{sample}.pharokka")
     threads:
-        config["resources"]["sml"]["cpu"]
+        config["resources"]["big"]["cpu"]
     resources:
-        mem = str(config["resources"]["sml"]["mem"]) + "MB",
-        time = config["resources"]["sml"]["time"]
+        mem = str(config["resources"]["big"]["mem"]) + "MB",
+        time = config["resources"]["big"]["time"]
     group:
         "megapharokka"
     benchmark:
