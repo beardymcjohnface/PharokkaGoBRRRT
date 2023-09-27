@@ -1,4 +1,5 @@
 import glob
+import re
 
 
 # Concatenate Snakemake's own log file with the master log file
