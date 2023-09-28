@@ -2,6 +2,7 @@ args:
     input:
     output: pharokkagobrrrt.out
     log: pharokkagobrrrt/pharokkagobrrrt.log
+    credentials: ~/.aws/credentials.yaml
 s3:
     path: hackathon/PharokkaGoBRRRT
     params:
