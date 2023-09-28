@@ -61,7 +61,7 @@ rule pack_megapharokka:
         os.path.join(config["args"]["logdir"], "pack_megapharokka.{sample}.log")
     shell:
         """
-        mv {input.gbk} {output.gbk}
+        cp {input.gbk} {output.gbk}
         tar --zstd --remove-files -cvf {output.tar} {params.dir}
         """
 
