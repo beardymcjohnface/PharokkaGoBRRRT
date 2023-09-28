@@ -64,3 +64,22 @@ rule pack_megapharokka:
         mv {input.gbk} {output.gbk}
         tar --zstd --remove-files -cvf {output.tar} {params.dir}
         """
+
+
+rule results_to_s3:
+    """Assumes aws cli is loaded"""
+    input:
+        gbk = os.path.join(config["args"]["results"],"{sample}.gbk"),
+        tar = os.path.join(config["args"]["archive"],"{sample}.tar.zst")
+    output:
+        gbk = S3.remote(config["s3"]["path"] + "{sample}.gbk"),
+        tar = S3.remote(config["s3"]["path"] + "{sample}.tar.zst")
+    params:
+        config["s3"]["params"]
+    localrule:
+        True
+    shell:
+        """
+        aws s3 cp {input.gbk} s3://{output.gbk} {params}
+        aws s3 cp {input.tar} s3://{output.tar} {params}
+        """

@@ -1,7 +1,12 @@
 args:
     input:
-    output: 'pharokkagobrrrt.out/'
-    log: 'pharokkagobrrrt/pharokkagobrrrt.log'
+    output: pharokkagobrrrt.out
+    log: pharokkagobrrrt/pharokkagobrrrt.log
+s3:
+    path: hackathon/PharokkaGoBRRRT
+    params:
+        --endpoint-url=https://projects.pawsey.org.au
+        --profile=director2187
 megapharokka:
     -g prodigal-gv
     --sensitivity 2
