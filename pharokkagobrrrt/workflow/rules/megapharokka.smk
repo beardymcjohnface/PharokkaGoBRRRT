@@ -11,7 +11,7 @@ rule run_megapharokka:
     input:
         os.path.join(config["args"]["temp"], "{sample}.fasta")
     output:
-        os.path.join(config["args"]["temp"], "{sample}.pharokka", "pharokka.gbk")
+        temp(os.path.join(config["args"]["temp"], "{sample}.pharokka", "pharokka.gbk"))
     params:
         dir = os.path.join(config["args"]["temp"], "{sample}.pharokka"),
         db = config["args"]["db"],
