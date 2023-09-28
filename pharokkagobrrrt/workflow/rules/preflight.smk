@@ -34,7 +34,7 @@ for file_path in file_list:
     if file_name.lower().endswith(
         (".fasta.gz", ".fa.gz", ".fna.gz", ".ffn.gz", ".faa.gz", ".frn.gz")
     ):
-        file_name = re.sub(r"\.f[nasta]+\.gz$","",file_name)
+        file_name = re.sub(r"\.f[frnast]+\.gz$","",file_name)
         fasta_files[file_name] = file_path
 fasta_list = list(fasta_files.keys())
 
