@@ -2,7 +2,7 @@
 
 
 configfile: os.path.join(workflow.basedir, '../', 'config', 'config.yaml')
-# configfile: os.path.join(config["args"]["credentials"])
+# configfile: os.path.expanduser(config["args"]["credentials"])
 
 
 # S3 = S3RemoteProvider(access_key_id=config["access_key_id"], secret_access_key=config["secret_access_key"])

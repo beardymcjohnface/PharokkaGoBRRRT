@@ -56,7 +56,7 @@ setup(
         "snakemake>=7.14.0",
         "pyyaml>=6.0",
         "Click>=8.1.3",
-        "boto3>=1.28.56"
+        # "boto3>=1.28.56"
     ],
     entry_points={
         "console_scripts": [
