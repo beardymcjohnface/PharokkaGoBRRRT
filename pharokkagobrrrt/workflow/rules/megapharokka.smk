@@ -76,8 +76,6 @@ rule results_to_s3:
         tar = S3.remote(config["s3"]["path"] + "{sample}.tar.zst")
     params:
         config["s3"]["params"]
-    localrule:
-        True
     shell:
         """
         aws s3 cp {input.gbk} s3://{output.gbk} {params}

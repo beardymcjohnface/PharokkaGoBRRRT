@@ -17,6 +17,9 @@ def targetRule(fn):
     return fn
 
 
+localrules: all, print_targets, results_to_s3
+
+
 @targetRule
 rule all:
     input:
