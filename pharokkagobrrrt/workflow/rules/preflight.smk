@@ -41,4 +41,4 @@ fasta_list = list(fasta_files.keys())
 
 # Targets
 targets = []
-targets.append(S3.remote(expand(config["s3"]["path"] + "{sample}.{ext}"), sample=fasta_list, ext=["gbk", "tar.zst"]))
+targets.append(S3.remote(expand(config["s3"]["path"] + "{sample}.{ext}", sample=fasta_list, ext=["gbk", "tar.zst"])))
