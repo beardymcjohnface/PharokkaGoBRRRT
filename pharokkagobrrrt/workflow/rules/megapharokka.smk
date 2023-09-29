@@ -35,18 +35,16 @@ rule run_megapharokka:
             "| zstd -T{threads} -o {output.tar} \n\n"
 
 
-# rule results_to_s3:
-#     """Assumes aws cli is loaded"""
-#     input:
-#         gbk = os.path.join(config["args"]["results"],"{sample}.gbk"),
-#         tar = os.path.join(config["args"]["archive"],"{sample}.tar.zst")
-#     output:
-#         gbk = S3.remote(config["s3"]["path"] + "{sample}.gbk"),
-#         tar = S3.remote(config["s3"]["path"] + "{sample}.tar.zst")
-#     params:
-#         config["s3"]["params"]
-#     shell:
-#         """
-#         aws s3 cp {input.gbk} s3://{output.gbk} {params}
-#         aws s3 cp {input.tar} s3://{output.tar} {params}
-#         """
+rule results_to_s3:
+    """Assumes aws cli is loaded"""
+    input:
+        gbk = os.path.join(config["args"]["results"],"{sample}.gbk"),
+        tar = os.path.join(config["args"]["archive"],"{sample}.tar.zst")
+    output:
+        gbk = S3.remote(os.path.join(config["s3"]["path"], "{sample}.gbk")),
+        tar = S3.remote(os.path.join(config["s3"]["path"], "{sample}.tar.zst"))
+    params:
+        config["s3"]["params"]
+    shell:
+        "aws s3 cp {input.gbk} s3://{output.gbk} {params}\n\n"
+        "aws s3 cp {input.tar} s3://{output.tar} {params}\n\n"
