@@ -1,16 +1,8 @@
-rule unzip_reference:
+rule run_megapharokka:
     input:
         lambda wildcards: fasta_files[wildcards.sample]
     output:
-        temp(os.path.join(config["args"]["temp"], "{sample}.fasta"))
-    shell:
-        "zcat {input} > {output}"
-
-
-rule run_megapharokka:
-    input:
-        os.path.join(config["args"]["temp"], "{sample}.fasta")
-    output:
+        faa = temp(os.path.join(config["args"]["temp"], "{sample}.fasta")),
         gbk = os.path.join(config["args"]["results"],"{sample}.gbk"),
         tar = os.path.join(config["args"]["archive"],"{sample}.tar.zst")
     params:
@@ -30,16 +22,17 @@ rule run_megapharokka:
     log:
         os.path.join(config["args"]["logdir"], "run_megapharokka.{sample}.log")
     shell:
+        "zcat {input} > {output.faa} \n\n"
         "megapharokka.py "
-            "-i {input} "
+            "-i {output.faa} "
             "-o {params.dir} "
             "-d {params.db} "
             "-t {threads} "
             "{params.params} "
-            "&> {log} \n"
-        "mv {params.gbk} {output.gbk} \n"
+            "&> {log} \n\n"
+        "mv {params.gbk} {output.gbk} \n\n"
         "tar --remove-files -cf - {params.dir} "
-            "| zstd -T{threads} -o {output.tar} \n"
+            "| zstd -T{threads} -o {output.tar} \n\n"
 
 
 # rule results_to_s3:
