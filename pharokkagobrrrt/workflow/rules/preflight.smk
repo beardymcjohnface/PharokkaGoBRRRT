@@ -43,4 +43,4 @@ fasta_list = list(fasta_files.keys())
 targets = []
 targets.append(expand(os.path.join(config["args"]["results"],"{sample}.gbk"), sample=fasta_list))
 targets.append(expand(os.path.join(config["args"]["archive"],"{sample}.tar.zst"), sample=fasta_list))
-targets.append(expand(os.path.join(config["s3"]["path"], "{sample}.{file}"), sample=fasta_list, file=["gbk", "tar.zst"]))
+targets.append(expand(os.path.join(config["args"]["temp"], "{sample}.done"), sample=fasta_list))
