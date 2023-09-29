@@ -11,9 +11,11 @@ rule run_megapharokka:
     input:
         os.path.join(config["args"]["temp"], "{sample}.fasta")
     output:
-        temp(os.path.join(config["args"]["temp"], "{sample}.pharokka", "pharokka.gbk"))
+        gbk = os.path.join(config["args"]["results"],"{sample}.gbk"),
+        tar = os.path.join(config["args"]["archive"],"{sample}.tar.zst")
     params:
         dir = os.path.join(config["args"]["temp"], "{sample}.pharokka"),
+        gbk = os.path.join(config["args"]["temp"],"{sample}.pharokka","pharokka.gbk"),
         db = config["args"]["db"],
         params = config["megapharokka"]
     threads:
@@ -23,47 +25,21 @@ rule run_megapharokka:
         time = config["resources"]["big"]["time"]
     conda:
         os.path.join(config["args"]["envs"], "pharokka.yaml")
-    group:
-        "megapharokka"
     benchmark:
         os.path.join(config["args"]["bench"], "run_megapharokka.{sample}.log")
     log:
         os.path.join(config["args"]["logdir"], "run_megapharokka.{sample}.log")
     shell:
-        """
-        megapharokka.py \
-            -i {input} \
-            -o {params.dir} \
-            -d {params.db} \
-            -t {threads} \
-            {params.params}
-        """
-
-
-rule pack_megapharokka:
-    input:
-        gbk = os.path.join(config["args"]["temp"],"{sample}.pharokka","pharokka.gbk")
-    output:
-        gbk = os.path.join(config["args"]["results"], "{sample}.gbk"),
-        tar = os.path.join(config["args"]["archive"], "{sample}.tar.zst")
-    params:
-        dir = os.path.join(config["args"]["temp"],"{sample}.pharokka")
-    threads:
-        config["resources"]["big"]["cpu"]
-    resources:
-        mem = str(config["resources"]["big"]["mem"]) + "MB",
-        time = config["resources"]["big"]["time"]
-    group:
-        "megapharokka"
-    benchmark:
-        os.path.join(config["args"]["bench"], "pack_megapharokka.{sample}.log")
-    log:
-        os.path.join(config["args"]["logdir"], "pack_megapharokka.{sample}.log")
-    shell:
-        """
-        cp {input.gbk} {output.gbk}
-        tar --zstd --remove-files -cvf {output.tar} {params.dir}
-        """
+        "megapharokka.py "
+            "-i {input} "
+            "-o {params.dir} "
+            "-d {params.db} "
+            "-t {threads} "
+            "{params.params} "
+            "&> {log} \n"
+        "mv {params.gbk} {output.gbk} \n"
+        "tar --remove-files -cf - {params.dir} "
+            "| zstd -T{threads} -o {output.tar} \n"
 
 
 # rule results_to_s3:
