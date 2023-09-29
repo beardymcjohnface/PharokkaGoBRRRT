@@ -10,7 +10,7 @@ s3:
         --profile=director2187
 megapharokka:
     -g prodigal-gv
-    --sensitivity 2
+    --sensitivity 3
     --skip_extra_annotations
     --skip_mash
     --mmseqs2
