@@ -47,5 +47,5 @@ rule s3_yeet_and_hope:
         tar = os.path.join(config["s3"]["path"], "{sample}.tar.zst"),
         params = config["s3"]["params"]
     shell:
-        "aws s3 cp {input.gbk} s3://{params.gbk} {params}\n\n"
-        "aws s3 cp {input.tar} s3://{params.tar} {params}\n\n"
+        "aws s3 cp {input.gbk} s3://{params.gbk} {params.params}\n\n"
+        "aws s3 cp {input.tar} s3://{params.tar} {params.params}\n\n"
