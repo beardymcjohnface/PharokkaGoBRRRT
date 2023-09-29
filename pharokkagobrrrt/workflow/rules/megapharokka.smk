@@ -43,8 +43,8 @@ rule s3_yeet_and_hope:
     output:
         temp(touch(os.path.join(config["args"]["temp"], "{sample}.done")))
     params:
-        gbk = S3.remote(os.path.join(config["s3"]["path"], "{sample}.gbk")),
-        tar = S3.remote(os.path.join(config["s3"]["path"], "{sample}.tar.zst")),
+        gbk = os.path.join(config["s3"]["path"], "{sample}.gbk"),
+        tar = os.path.join(config["s3"]["path"], "{sample}.tar.zst"),
         params = config["s3"]["params"]
     shell:
         "aws s3 cp {input.gbk} s3://{params.gbk} {params}\n\n"
