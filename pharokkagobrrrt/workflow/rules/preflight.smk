@@ -42,5 +42,7 @@ fasta_list = list(fasta_files.keys())
 # Targets
 targets = []
 targets.append(expand(os.path.join(config["args"]["results"],"{sample}.gbk"), sample=fasta_list))
+targets.append(expand(os.path.join(config["args"]["results"],"{sample}.pharokka.gbk"), sample=fasta_list))
 targets.append(expand(os.path.join(config["args"]["archive"],"{sample}.tar.zst"), sample=fasta_list))
+targets.append(expand(os.path.join(config["args"]["archive"],"{sample}.pharokka.tar.zst"), sample=fasta_list))
 targets.append(expand(os.path.join(config["args"]["temp"], "{sample}.done"), sample=fasta_list))

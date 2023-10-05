@@ -15,6 +15,11 @@ megapharokka:
     --skip_mash
     --mmseqs2
     --force
+pharokka:
+    -g prodigal-gv
+    --skip_extra_annotations
+    --skip_mash
+    --force
 resources:
     big:
         cpu: 64
